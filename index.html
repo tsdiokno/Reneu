@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Reneu - Fixed-Page NET Bible & Scholarly Canvas</title>
+    <meta name="description" content="A streamlined Bible reading and reflection canvas for delighting in God's Word and observing how your mind is being renewed day by day." />
+    <meta property="og:title" content="Reneu - Fixed-Page NET Bible & Scholarly Canvas" />
+    <meta property="og:description" content="A streamlined Bible reading and reflection canvas for delighting in God's Word and observing how your mind is being renewed day by day." />
+    <meta name="theme-color" content="#f5efeb" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Reneu" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    
+    <!-- Offline Font Preloads for Immediate Zero-Latency Rendering -->
+    <link rel="preload" href="/fonts/literata-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/inter-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/plus-jakarta-sans-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Google Fonts for Scholarly Typography (Fallback / Online CDN) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=Plus+Jakarta+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- Instant Pre-render Theme Application for Persistent Splash -->
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('scripturepage_theme');
+          if (!theme) {
+            var appStr = localStorage.getItem('scripturepage_appearance');
+            if (appStr) {
+              theme = JSON.parse(appStr).theme;
+            }
+          }
+          if (theme === 'black' || theme === 'white' || theme === 'parchment') {
+            document.documentElement.setAttribute('data-theme', theme);
+            if (theme === 'black') {
+              document.documentElement.classList.add('dark');
+              document.documentElement.style.colorScheme = 'dark';
+            } else {
+              document.documentElement.classList.remove('dark');
+              document.documentElement.style.colorScheme = 'light';
+            }
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) {
+              meta.setAttribute('content', theme === 'black' ? '#111113' : theme === 'white' ? '#ffffff' : '#f5efeb');
+            }
+          } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'black');
+            document.documentElement.classList.add('dark');
+            document.documentElement.style.colorScheme = 'dark';
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Instant Persistent Splash Screen Styles (Adapting to User's Configured Color Theme) -->
+    <style>
+      #pwa-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f5efeb;
+        color: #1c1917;
+        font-family: 'Literata', 'EB Garamond', Georgia, -apple-system, BlinkMacSystemFont, serif;
+        transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s ease;
+        pointer-events: auto;
+        user-select: none;
+        -webkit-user-select: none;
+        overflow: hidden !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+      #pwa-splash::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+      }
+
+      /* Deactivate scrollbars on page while splash screen is active */
+      html.splash-active,
+      body.splash-active,
+      html:has(#pwa-splash:not(.splash-dismissed)),
+      body:has(#pwa-splash:not(.splash-dismissed)) {
+        overflow: hidden !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+      html.splash-active::-webkit-scrollbar,
+      body.splash-active::-webkit-scrollbar,
+      html:has(#pwa-splash:not(.splash-dismissed))::-webkit-scrollbar,
+      body:has(#pwa-splash:not(.splash-dismissed))::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+      }
+
+      #pwa-splash.splash-dismissed {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      /* Parchment Theme (Default) */
+      [data-theme="parchment"] #pwa-splash,
+      #pwa-splash[data-splash-theme="parchment"] {
+        background-color: #f5efeb;
+        color: #1c1917;
+      }
+      [data-theme="parchment"] #pwa-splash .splash-progress-track,
+      #pwa-splash[data-splash-theme="parchment"] .splash-progress-track {
+        background: rgba(28, 25, 23, 0.12);
+      }
+
+      /* White Theme */
+      [data-theme="white"] #pwa-splash,
+      #pwa-splash[data-splash-theme="white"] {
+        background-color: #ffffff;
+        color: #111827;
+      }
+      [data-theme="white"] #pwa-splash .splash-progress-track,
+      #pwa-splash[data-splash-theme="white"] .splash-progress-track {
+        background: rgba(17, 24, 39, 0.1);
+      }
+
+      /* Black Theme */
+      [data-theme="black"] #pwa-splash,
+      .dark #pwa-splash,
+      #pwa-splash[data-splash-theme="black"] {
+        background-color: #111113;
+        color: #f5f5f7;
+      }
+      [data-theme="black"] #pwa-splash .splash-progress-track,
+      .dark #pwa-splash .splash-progress-track,
+      #pwa-splash[data-splash-theme="black"] .splash-progress-track {
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      .splash-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+      }
+      .splash-icon {
+        width: 52px;
+        height: 52px;
+        margin-bottom: 1.25rem;
+        color: currentColor;
+        opacity: 0.85;
+      }
+      .splash-title {
+        font-family: 'Cinzel', 'EB Garamond', Georgia, serif;
+        font-size: 1.625rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        line-height: 1.2;
+        margin-bottom: 0.35rem;
+      }
+      .splash-tagline {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 0.8125rem;
+        font-weight: 400;
+        opacity: 0.6;
+        letter-spacing: 0.02em;
+        margin-bottom: 2rem;
+      }
+      .splash-progress-track {
+        width: 120px;
+        height: 2.5px;
+        background: rgba(0, 0, 0, 0.08);
+        border-radius: 9999px;
+        overflow: hidden;
+        position: relative;
+      }
+      .splash-progress-bar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 35%;
+        background-color: currentColor;
+        opacity: 0.75;
+        border-radius: 9999px;
+        animation: splash-indeterminate 1.4s infinite ease-in-out;
+      }
+      @keyframes splash-indeterminate {
+        0% { left: -35%; width: 35%; }
+        50% { left: 30%; width: 45%; }
+        100% { left: 100%; width: 35%; }
+      }
+    </style>
+  </head>
+  <body class="antialiased splash-active">
+    <!-- Instant Persistent Splash Screen for PWA Launch & Slow Connection -->
+    <div id="pwa-splash" aria-hidden="true">
+      <script>
+        (function() {
+          try {
+            var t = localStorage.getItem('scripturepage_theme') || document.documentElement.getAttribute('data-theme');
+            if (t) {
+              var s = document.getElementById('pwa-splash');
+              if (s) s.setAttribute('data-splash-theme', t);
+            }
+          } catch(e) {}
+        })();
+      </script>
+      <div class="splash-box">
+        <svg class="splash-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+        </svg>
+        <div class="splash-title">Reneu</div>
+        <div class="splash-tagline">Renewing the mind day by day</div>
+        <div class="splash-progress-track">
+          <div class="splash-progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Fallback safeguard: Never allow splash to freeze the user indefinitely
+      (function() {
+        var splash = document.getElementById('pwa-splash');
+        if (!splash) return;
+
+        function cleanupSplashActive() {
+          document.body.classList.remove('splash-active');
+          document.documentElement.classList.remove('splash-active');
+        }
+        
+        // Allow clicking the splash screen to dismiss at any time
+        splash.addEventListener('click', function() {
+          splash.classList.add('splash-dismissed');
+          cleanupSplashActive();
+          setTimeout(function() { if (splash.parentNode) splash.parentNode.removeChild(splash); }, 400);
+        });
+
+        // 3.5s maximum fallback unless explicit ?splash=true
+        if (window.location.search.indexOf('splash=') === -1) {
+          setTimeout(function() {
+            var el = document.getElementById('pwa-splash');
+            if (el && !el.classList.contains('splash-dismissed')) {
+              el.classList.add('splash-dismissed');
+              cleanupSplashActive();
+              setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 400);
+            }
+          }, 3500);
+        }
+      })();
+    </script>
+  </body>
+</html>
+

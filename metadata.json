@@ -1,0 +1,6 @@
+{
+  "name": "Reneu - Fixed-Page NET Bible & Scholarly Canvas",
+  "description": "A streamlined Bible reading and reflection canvas for delighting in God's Word and observing how your mind is being renewed day by day.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "/",
+  "name": "Reneu - Fixed-Page NET Bible & Scholarly Canvas",
+  "short_name": "Reneu",
+  "description": "A streamlined Bible reading and reflection canvas for delighting in God's Word and observing how your mind is being renewed day by day.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#f5efeb",
+  "background_color": "#f5efeb",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
