@@ -10,6 +10,10 @@
 
 ---
 
+![Reneu Screenshot](screenshot.png)
+
+---
+
 ## Overview
 
 Reneu is designed for focused scripture reading and thoughtful personal study. Rather than cluttering the text with social feeds, gamified streaks, or intrusive overlays, Reneu gives you a quiet, typography-first canvas with responsive note-taking and intelligent synthesis.
